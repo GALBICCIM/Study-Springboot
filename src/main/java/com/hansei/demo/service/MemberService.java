@@ -33,4 +33,14 @@ public class MemberService {
     public Optional<Member> findOne(int memberId) {
         return memberRepository.findById(memberId);
     }
+
+
+    public Optional<Member> deleteById(int memberId) {
+        return memberRepository.deleteById(memberId);
+    }
+
+
+    public Optional<Member> updateById(String oldName, String newName) {
+        return memberRepository.updateByName(oldName, newName);
+    }
 }
