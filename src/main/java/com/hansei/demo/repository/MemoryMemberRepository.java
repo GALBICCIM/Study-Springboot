@@ -1,6 +1,7 @@
 package com.hansei.demo.repository;
 
 import com.hansei.demo.domain.Member;
+import com.hansei.demo.service.MemberService;
 
 import java.util.*;
 
@@ -12,7 +13,7 @@ public class MemoryMemberRepository implements MemberRepository {
     public Member save(Member member) {
         member.setId(++sequence);
         store.put(member.getId(), member);
-        return null;
+        return member;
     }
 
     @Override
@@ -27,6 +28,24 @@ public class MemoryMemberRepository implements MemberRepository {
     @Override
     public Optional<Member> findByName(String name) {
         return store.values().stream().filter(member -> member.getName().equals(name)).findAny();
+    }
+
+    @Override
+    public Optional<Member> deleteById(int id) {
+        store.remove(id);
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Member> updateByName(String oldName, String newName) {
+        Optional<Member> optionalMember = store.values().stream().filter(member -> member.getName().equals(oldName)).findFirst();
+
+        optionalMember.ifPresent(member -> {
+            member.setName(newName);
+            store.put(member.getId(), member);
+        });
+
+        return optionalMember;
     }
 
     @Override
