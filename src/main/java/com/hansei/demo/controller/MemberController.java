@@ -33,8 +33,14 @@ public class MemberController {
     }
 
 
-    @GetMapping("member/{id}")
+    @GetMapping("/member/{id}")
     public Member getMember(@PathVariable int id) {
         return memberService.findOne(id).get();
+    }
+
+
+    @DeleteMapping("/member/{id}")
+    public Member deleteMember(@PathVariable int id) {
+        return memberService.deleteById(id).get();
     }
 }
