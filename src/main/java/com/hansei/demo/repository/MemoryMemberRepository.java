@@ -1,12 +1,14 @@
 package com.hansei.demo.repository;
 
 import com.hansei.demo.domain.Member;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 @Repository
 public class MemoryMemberRepository implements MemberRepository {
+    @Autowired
     private static Map<Integer, Member> store = new HashMap<>();
     private static int sequence = 0;
 
@@ -14,7 +16,7 @@ public class MemoryMemberRepository implements MemberRepository {
     public Member save(Member member) {
         member.setId(++sequence);
         store.put(member.getId(), member);
-        return null;
+        return member;
     }
 
     @Override
