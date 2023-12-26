@@ -12,5 +12,9 @@ public interface MemberRepository {
 
     Optional<Member> findByName(String name);
 
+    Optional<Member> deleteById(int id);
+
+    Optional<Member> updateByName(String oldName, String newName);
+
     List<Member> findAll();
 }

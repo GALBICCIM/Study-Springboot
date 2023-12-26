@@ -17,7 +17,7 @@ public class MemberServiceTest {
     @BeforeEach
     public void beforeEach() {
         memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService();
+        memberService = new MemberService(memberRepository);
     }
 
     @AfterEach
@@ -50,5 +50,25 @@ public class MemberServiceTest {
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
 
         assertEquals("이미 존재하는 회원입니다.", e.getMessage());
+    }
+
+
+    @Test
+    public void 회원_정보_삭제() {
+        Member member2 = new Member();
+        member2.setName("hello");
+
+        int saveId = memberService.join(member2);
+
+        memberService.deleteById(saveId);
+    }
+
+
+    @Test
+    public void 회원_정보_수정() {
+        Member member3 = new Member();
+        member3.setName("parkseungwon1");
+
+        memberService.updateById("parkseungwon1", "parkseungwon2");
     }
 }
