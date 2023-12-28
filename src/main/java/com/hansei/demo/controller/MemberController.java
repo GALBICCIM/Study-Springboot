@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MemberController {
@@ -37,4 +38,17 @@ public class MemberController {
     public Member getMember(@PathVariable int id) {
         return memberService.findOne(id).get();
     }
+
+
+    // 사용자 삭제 API
+    @DeleteMapping("/member/{id}")
+    public Member deleteMember(@PathVariable int id) {
+        return memberService.deleteById(id).get();
+    }
+
+
+//    @PutMapping("/member/{id}")
+//    public Member updateMember(@RequestBody Member member) {
+//
+//    }
 }

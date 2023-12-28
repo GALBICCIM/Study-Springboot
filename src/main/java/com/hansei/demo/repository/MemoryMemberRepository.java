@@ -35,8 +35,7 @@ public class MemoryMemberRepository implements MemberRepository {
 
     @Override
     public Optional<Member> deleteById(int id) {
-        store.remove(id);
-        return Optional.empty();
+        return Optional.ofNullable(store.remove(id));
     }
 
     @Override
